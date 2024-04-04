@@ -22,14 +22,6 @@ const SkeletonCards = () => {
 }
 
 function PokemonCards({pokemon, imageType}) {
-    const m = {};
-    for (const p of pokemon) {
-        if (!Object.hasOwn(m, p.name)) {
-            m[p.name] = {};
-        }
-        m[p.id] = p.name;
-    }
-    console.log('MMMM', m);
     return (
         <ul className="flex justify-center items-center flex-wrap gap-6 mt-10">
             {pokemon.map((p) => {
