@@ -11,7 +11,7 @@ export default async function Pokemon({ params }) {
     nextId = nextId >= 151 ? 1 : nextId;
 
     return (
-        <main className="my-5">
+        <main className="my-12">
             <div className="flex flex-col justify-center items-center">
                 <Image
                     src={pokemon.sprites.other['dream_world'].front_default}
@@ -46,7 +46,7 @@ export default async function Pokemon({ params }) {
                 {/* TODO: Pokemon cries (audio files .ogg) */}
                 {/* TODO: Pokemon abilities */}
             </div>
-            <div className="flex justify-between items-center my-10">
+            <div className="flex justify-between items-center my-5">
                 <a href={`/pokemon/${prevId}/${POKEMON_IDS[prevId]}`} className="bg-black text-white py-1 px-4 rounded-md hover:text-white hover:bg-slate-900 hover:no-underline" type="button">Prev</a>
                 <a href={`/pokemon/${nextId}/${POKEMON_IDS[nextId]}`} className="bg-black text-white py-1 px-4 rounded-md hover:text-white hover:bg-slate-900 hover:no-underline" type="button">Next</a>
             </div>
