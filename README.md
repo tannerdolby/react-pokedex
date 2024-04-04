@@ -1,5 +1,5 @@
 # Pokédex
-View all 151 pokemon from the first generation. Pokemon data provided by the RESTful [PokeAPI](https://pokeapi.co/).
+View all 151 pokémon from the first generation. Pokemon data fetched from the [PokeAPI](https://pokeapi.co/).
 
 ## Getting Started
 
