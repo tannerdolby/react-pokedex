@@ -6,7 +6,7 @@ export default function Header() {
           <div>
             <a
                 href="/"
-                className='text-5xl text-gray-800 my-2 hover:text-white hover:bg-black hover:no-underline'
+                className='text-5xl text-black my-2 hover:text-white hover:bg-black hover:no-underline'
             >
                 Pokédex
             </a>
