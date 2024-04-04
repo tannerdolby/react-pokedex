@@ -1,5 +1,6 @@
 import { fetchPokemonById, POKEMON_TYPE_COLORS, POKEMON_IDS } from "../../../helpers/pokemon";
 import Image from "next/image";
+import { titleCase } from "../../../helpers/util";
 
 export default async function Pokemon({ params }) {
     const { id, name } = params;
@@ -20,7 +21,7 @@ export default async function Pokemon({ params }) {
                     className='w-[300px] h-[300px]'
                 />
                 <div className="flex justify-between items-center">
-                    <h1 className="text-4xl my-5">{name}</h1>
+                    <h1 className="text-4xl my-5">{titleCase(name)}</h1>
                     <span className="text-black ml-2">#{pokemon.id}</span>
                 </div>
                 <span>Weight: {pokemon.weight} lbs</span>
