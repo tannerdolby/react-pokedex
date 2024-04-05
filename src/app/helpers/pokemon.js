@@ -5,7 +5,6 @@ export async function fetchPokemonById(id) {
     return await res.json();
 }
 
-// TODO: Better handle this custom sprite URL
 export function getCustomPokemonSpriteUrl(sprites, imageType) {
     if (!sprites) {
         return '';
