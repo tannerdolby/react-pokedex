@@ -37,7 +37,7 @@ function PokemonCards({pokemon, imageType}) {
 
 export default function PokemonList() {
     const [pokemon, setPokemon] = useState([]);
-    const [imageType, setImageType] = useState('');
+    const [imageType, setImageType] = useState('dream_world');
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
