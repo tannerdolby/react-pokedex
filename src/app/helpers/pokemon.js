@@ -1,5 +1,37 @@
 export const BASE_URL = 'https://pokeapi.co/api/v2/pokemon/';
 
+export async function fetchPokemonById(id) {
+    const res = await fetch(`${BASE_URL}${id}`);
+    return await res.json();
+}
+
+// TODO: Better handle this custom sprite URL lookup
+export function getCustomPokemonSpriteUrl(sprites, imageType) {
+    if (!sprites) {
+        return '';
+    }
+
+    const otherSprites = sprites.other;
+    const imageKey = imageType.split(" ")[0];
+
+    // TODO: Add support for other available image directions (front, back)
+    let spriteDirection = 'front_default';
+    
+    if (imageType.includes('shiny')) {
+        spriteDirection = 'front_shiny';
+    }
+
+    if (!imageKey && spriteDirection in sprites) {
+        return sprites[spriteDirection]
+    }
+
+    if (imageKey in otherSprites) {
+        return otherSprites[imageKey][spriteDirection];
+    }
+
+    return '';
+}
+
 export const POKEMON_TYPE_COLORS = {
     poison: {
         background: '#C38AFC',
@@ -61,11 +93,6 @@ export const POKEMON_TYPE_COLORS = {
         background: '#1D3B51',
         textColor: '#fff'
     }
-}
-
-export async function fetchPokemonById(id) {
-    const res = await fetch(`${BASE_URL}${id}`);
-    return await res.json();
 }
 
 export const POKEMON_IDS = {

@@ -1,20 +1,25 @@
-import { fetchPokemonById, POKEMON_TYPE_COLORS, POKEMON_IDS } from "../../../helpers/pokemon";
+import { fetchPokemonById, POKEMON_TYPE_COLORS, POKEMON_IDS, getCustomPokemonSpriteUrl } from "../../../helpers/pokemon";
 import Image from "next/image";
+import Link from "next/link";
 import { titleCase } from "../../../helpers/util";
 
-export default async function Pokemon({ params }) {
-    const { id, name } = params;
+export default async function Pokemon({ params, searchParams }) {
+    const {id, name} = params;
+    const {imageType} = searchParams;
     const pokemon = await fetchPokemonById(id);
+    const imageUrl = getCustomPokemonSpriteUrl(pokemon.sprites, imageType);
+    const prevNextBtnStyles = 'bg-black text-white py-1 px-4 rounded-md hover:text-white hover:bg-slate-900 hover:no-underline';
     let prevId = Number(id)-1;
     let nextId = Number(id)+1;
+
     prevId = prevId <= 0 ? 151 : prevId;
     nextId = nextId >= 151 ? 1 : nextId;
 
     return (
-        <main className="my-12">
+        <main id="#main" className="my-8">
             <div className="flex flex-col justify-center items-center">
                 <Image
-                    src={pokemon.sprites.other['dream_world'].front_default}
+                    src={imageUrl || pokemon.sprites.other['dream_world'].front_default}
                     alt={`Image of ${name}`}
                     width={300}
                     height={300}
@@ -47,8 +52,24 @@ export default async function Pokemon({ params }) {
                 {/* TODO: Pokemon abilities */}
             </div>
             <div className="flex justify-between items-center my-5">
-                <a href={`/pokemon/${prevId}/${POKEMON_IDS[prevId]}`} className="bg-black text-white py-1 px-4 rounded-md hover:text-white hover:bg-slate-900 hover:no-underline" type="button">Prev</a>
-                <a href={`/pokemon/${nextId}/${POKEMON_IDS[nextId]}`} className="bg-black text-white py-1 px-4 rounded-md hover:text-white hover:bg-slate-900 hover:no-underline" type="button">Next</a>
+                <Link
+                    href={{
+                        pathname: `/pokemon/${prevId}/${POKEMON_IDS[prevId]}`,
+                        query: {imageType: imageType}
+                    }}
+                    className={prevNextBtnStyles}
+                >
+                    Prev
+                </Link>
+                <Link
+                    href={{
+                        pathname: `/pokemon/${nextId}/${POKEMON_IDS[nextId]}`,
+                        query: {imageType: imageType}
+                    }}
+                    className={prevNextBtnStyles}
+                    >
+                        Next
+                    </Link>
             </div>
         </main>
     )

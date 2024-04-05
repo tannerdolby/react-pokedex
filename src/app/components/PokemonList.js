@@ -37,7 +37,7 @@ function PokemonCards({pokemon, imageType}) {
 
 export default function PokemonList() {
     const [pokemon, setPokemon] = useState([]);
-    const [imageType, setImageType] = useState('dream_world');
+    const [imageType, setImageType] = useState('');
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -51,7 +51,7 @@ export default function PokemonList() {
             setIsLoading(false);
         }
         getPokemon();
-        const storedImageType = window.localStorage.getItem('imageType');
+        const storedImageType = window.localStorage.getItem('POKEMON_IMAGE_TYPE');
         if (storedImageType) {
             setImageType(storedImageType);
         }
@@ -62,11 +62,12 @@ export default function PokemonList() {
             <div className="flex flex-col text-left w-fit mr-auto ml-1 mt-2">
                 <label htmlFor="sprite-toggler" className="block mb-2 text-sm font-medium text-gray-900">Change Pokemon Sprites</label>
                 <select
+                    name="Pokemon image type selector"
                     className="block w-full py-1.5 px-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500"
                     value={imageType}
                     onChange={(e) => {
                         setImageType(e.target.value);
-                        window.localStorage.setItem('imageType', JSON.stringify(imageType));
+                        window.localStorage.setItem('POKEMON_IMAGE_TYPE', e.target.value);
                     }}
                 >
                     <option value="">Gameboy</option>
