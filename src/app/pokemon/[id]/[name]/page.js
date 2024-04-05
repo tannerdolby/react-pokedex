@@ -16,7 +16,7 @@ export default async function Pokemon({ params, searchParams }) {
     nextId = nextId >= 151 ? 1 : nextId;
 
     return (
-        <main className="mt-8 min-h-screen flex flex-col justify-between">
+        <main className="min-h-screen flex flex-col justify-between">
             <div className="flex flex-col justify-center items-center min-h-[80vh]">
                 <Image
                     src={imageUrl || pokemon.sprites.other['dream_world'].front_default}
