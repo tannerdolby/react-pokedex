@@ -22,7 +22,7 @@ export function getCustomPokemonSpriteUrl(sprites, imageType) {
 
     if (imageKey === 'gameboy') {
         return sprites[spriteDirection];
-    } else {
+    } else if (Object.hasOwn(otherSprites, imageKey)) {
         return otherSprites[imageKey][spriteDirection];
     }
 }
