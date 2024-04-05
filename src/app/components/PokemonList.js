@@ -63,7 +63,7 @@ export default function PokemonList() {
                 <label htmlFor="sprite-toggler" className="block mb-2 text-sm font-medium text-gray-900">Change Pokemon Sprites</label>
                 <select
                     name="Pokemon image type selector"
-                    className="block w-full py-1.5 px-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    className="block w-full py-2 px-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500"
                     value={imageType}
                     onChange={(e) => {
                         setImageType(e.target.value);

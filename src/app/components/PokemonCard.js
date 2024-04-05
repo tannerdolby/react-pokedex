@@ -9,7 +9,7 @@ export default function PokemonCard({pokemon, imageType}) {
 
     return (
         <div>
-            <Link href={{
+            <Link scroll={true} href={{
                 pathname: `/pokemon/${pokemon.id}/${pokemon.name}`,
                 query: {imageType: imageType},
             }}>
