@@ -57,10 +57,6 @@ export default function PokemonList() {
         }
     }, []);
 
-    useEffect(() => {
-        setIsLoading(true);
-    }, [imageType]);
-
     return (
         <>
             <div className="flex flex-col text-left w-fit mr-auto ml-1 mt-2">
