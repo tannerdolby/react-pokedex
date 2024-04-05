@@ -5,7 +5,7 @@ export async function fetchPokemonById(id) {
     return await res.json();
 }
 
-// TODO: Better handle this custom sprite URL lookup
+// TODO: Better handle this custom sprite URL
 export function getCustomPokemonSpriteUrl(sprites, imageType) {
     if (!sprites) {
         return '';
@@ -21,15 +21,11 @@ export function getCustomPokemonSpriteUrl(sprites, imageType) {
         spriteDirection = 'front_shiny';
     }
 
-    if (!imageKey && spriteDirection in sprites) {
-        return sprites[spriteDirection]
-    }
-
-    if (imageKey in otherSprites) {
+    if (imageKey === 'gameboy') {
+        return sprites[spriteDirection];
+    } else {
         return otherSprites[imageKey][spriteDirection];
     }
-
-    return '';
 }
 
 export const POKEMON_TYPE_COLORS = {

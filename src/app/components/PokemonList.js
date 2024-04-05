@@ -70,11 +70,11 @@ export default function PokemonList() {
                         window.localStorage.setItem('POKEMON_IMAGE_TYPE', e.target.value);
                     }}
                 >
-                    <option value="">Gameboy</option>
+                    <option value="gameboy">Gameboy</option>
                     <option value="home">Modern</option>
                     <option value="official-artwork">Official Artwork</option>
                     <option value="dream_world">Dream World</option>
-                    <option value="shiny">Gameboy (Shiny)</option>
+                    <option value="gameboy shiny">Gameboy (Shiny)</option>
                     <option value="home shiny">Modern (Shiny)</option>
                     <option value="official-artwork shiny">Official Artwork (Shiny)</option>
                 </select>

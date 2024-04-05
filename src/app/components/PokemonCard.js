@@ -6,7 +6,7 @@ import Link from 'next/link';
 export default function PokemonCard({pokemon, imageType}) {
     const sprites = pokemon.sprites;
     const customUrl = getCustomPokemonSpriteUrl(sprites, imageType);
-
+    console.log(customUrl);
     return (
         <div>
             <Link href={{
