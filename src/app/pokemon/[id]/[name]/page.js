@@ -30,7 +30,7 @@ export default async function Pokemon({ params, searchParams }) {
                     <span className="text-black ml-2">#{pokemon.id}</span>
                 </div>
                 <span>Weight: {pokemon.weight} lbs</span>
-                <span>Height: {pokemon.height}"</span>
+                <span>Height: {pokemon.height}&quot;</span>
                 <ul className='flex flex-start items-center flex-wrap gap-2 my-4'>
                     {pokemon.types.map((t) => {
                         return (
