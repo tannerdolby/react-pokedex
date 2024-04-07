@@ -5,6 +5,7 @@ import { fetchPokemonById } from "../helpers/pokemon";
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
+import ImageSwitcher from "./ImageSwitcher";
 
 const SkeletonCards = () => {
     const blankCards = new Array(151).fill(0);
@@ -37,6 +38,7 @@ function PokemonCards({pokemon, imageType}) {
 
 export default function PokemonList() {
     const [pokemon, setPokemon] = useState([]);
+    const [searched, setSearched] = useState([]);
     const [imageType, setImageType] = useState('dream_world');
     const [isLoading, setIsLoading] = useState(true);
 
@@ -59,27 +61,23 @@ export default function PokemonList() {
 
     return (
         <>
-            <div className="flex flex-col text-left w-fit mr-auto ml-1 mt-2">
-                <label htmlFor="sprite-toggler" className="block mb-2 text-sm font-medium text-gray-900">Change Pokemon Sprites</label>
-                <select
-                    name="Pokemon image type selector"
-                    className="block w-full py-2 px-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500"
-                    value={imageType}
-                    onChange={(e) => {
+            <div className="flex justify-between items-baseline w-full">
+                <div className="flex flex-col">
+                    <label className="block mb-1 text-sm font-medium text-gray-900">Search</label>
+                    <input onChange={(e) => {
+                        const filtered = pokemon.filter(p => p.name.includes(e.target.value.toLowerCase()));
+                        setSearched(filtered);
+                    }} className="border border-gray-300 rounded-md px-2 py-1.5" type="text" placeholder="Enter pokemon..." />
+                </div>
+                <ImageSwitcher
+                    imageType={imageType}
+                    onChangeHandler={(e) => {
                         setImageType(e.target.value);
                         window.localStorage.setItem('POKEMON_IMAGE_TYPE', e.target.value);
                     }}
-                >
-                    <option value="gameboy">Gameboy</option>
-                    <option value="home">Modern</option>
-                    <option value="official-artwork">Official Artwork</option>
-                    <option value="dream_world">Dream World</option>
-                    <option value="gameboy shiny">Gameboy (Shiny)</option>
-                    <option value="home shiny">Modern (Shiny)</option>
-                    <option value="official-artwork shiny">Official Artwork (Shiny)</option>
-                </select>
+                />
             </div>
-            {isLoading ? <SkeletonCards /> : <PokemonCards pokemon={pokemon} imageType={imageType} />}
+            {isLoading ? <SkeletonCards /> : <PokemonCards pokemon={searched.length ? searched : pokemon} imageType={imageType} />}
         </>
     );
 }
