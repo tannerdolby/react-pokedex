@@ -17,16 +17,16 @@ export default async function Pokemon({ params, searchParams }) {
 
     return (
         <main className="min-h-screen flex flex-col justify-between">
-            <div className="flex flex-col justify-center items-center min-h-[80vh]">
+            <div className="flex flex-col justify-center items-center min-h-[80vh] mt-8">
                 <Image
                     src={imageUrl || pokemon.sprites.other['dream_world'].front_default}
                     alt={`Image of ${name}`}
-                    width={300}
-                    height={300}
-                    className='w-[300px] h-[300px]'
+                    width={375}
+                    height={375}
+                    className='w-[375px] h-[375px]'
                 />
                 <div className="flex justify-between items-center">
-                    <h1 className="text-4xl my-5">{titleCase(name)}</h1>
+                    <h1 className="text-4xl my-4">{titleCase(name)}</h1>
                     <span className="text-black ml-2">#{pokemon.id}</span>
                 </div>
                 <span>Weight: {pokemon.weight} lbs</span>
