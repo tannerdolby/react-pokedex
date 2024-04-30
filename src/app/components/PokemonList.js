@@ -20,13 +20,14 @@ export default function PokemonList() {
   return (
     <>
       <div className="flex justify-between items-baseline w-full">
-        <div className="flex flex-col">
+        {/* TODO: Come back and update search
+          <div className="flex flex-col">
           <label className="block mb-1 text-sm font-medium text-gray-900">Search</label>
           <input onChange={(e) => {
             const filtered = [].filter(p => p.name.includes(e.target.value.toLowerCase()));
             setSearched(filtered);
           }} className="border border-gray-300 rounded-md px-2 py-2 text-sm" type="text" placeholder="Enter pokemon..." />
-        </div>
+        </div> */}
         <ImageSwitcher
           imageType={imageType}
           onChangeHandler={(e) => {
@@ -37,7 +38,7 @@ export default function PokemonList() {
       </div>
       {<PokemonCards search={searched} count={count} imageType={imageType} />}
       <button
-        onClick={() => setCount(count + 15)}
+        onClick={() => setCount(count + 10)}
         className="text-sm bg-slate-50 rounded-md px-4 py-1 border border-gray-300 mt-8 hover:bg-slate-100"
       >
         Load More

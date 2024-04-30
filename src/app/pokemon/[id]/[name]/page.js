@@ -18,7 +18,13 @@ export default function Pokemon({ params, searchParams }) {
     let prevId = Number(id)-1;
     let nextId = Number(id)+1;
     prevId = prevId <= 0 ? 151 : prevId;
-    nextId = nextId >= 151 ? 1 : nextId;
+    nextId = nextId >= 1025 ? 1 : nextId;
+
+    if (isError) {
+        return (
+            <p>Oops! Something went wrong</p>
+        )
+    }
 
     return (
         <main className="min-h-screen flex flex-col justify-start">
