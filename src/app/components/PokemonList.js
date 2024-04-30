@@ -49,7 +49,7 @@ export default function PokemonList() {
 
 function PokemonCards({ count, imageType, search, }) {
   const cards = [];
-  for (let i=1; i < count; i++) {
+  for (let i=1; i <= count; i++) {
     cards.push((
       <li key={`${i}-${imageType}`}>
         <PokemonCard search={search} id={i} imageType={imageType} />
