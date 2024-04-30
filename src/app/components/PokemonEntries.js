@@ -15,7 +15,7 @@ export default function PokemonEntries() {
         <div className='grid grid-col-2'>
             <ul>
                 {Object.values(POKEMON_IDS).map(name => (
-                    <li>{name}</li>
+                    <li key={name}>{name}</li>
                 ))}
             </ul>
             <div>
