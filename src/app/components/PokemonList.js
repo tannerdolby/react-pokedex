@@ -23,7 +23,7 @@ export default function PokemonList() {
         <div className="flex flex-col">
           <label className="block mb-1 text-sm font-medium text-gray-900">Search</label>
           <input onChange={(e) => {
-            const filtered = pokemonList.filter(p => p.name.includes(e.target.value.toLowerCase()));
+            const filtered = [].filter(p => p.name.includes(e.target.value.toLowerCase()));
             setSearched(filtered);
           }} className="border border-gray-300 rounded-md px-2 py-2 text-sm" type="text" placeholder="Enter pokemon..." />
         </div>
@@ -35,7 +35,7 @@ export default function PokemonList() {
           }}
         />
       </div>
-      {<PokemonCards count={count} imageType={imageType} />}
+      {<PokemonCards search={searched} count={count} imageType={imageType} />}
       <button
         onClick={() => setCount(count + 15)}
         className="text-sm bg-slate-50 rounded-md px-4 py-1 border border-gray-300 mt-8 hover:bg-slate-100"
@@ -46,12 +46,12 @@ export default function PokemonList() {
   );
 }
 
-function PokemonCards({ count, imageType }) {
+function PokemonCards({ count, imageType, search, }) {
   const cards = [];
   for (let i=1; i < count; i++) {
     cards.push((
       <li key={`${i}-${imageType}`}>
-        <PokemonCard id={i} imageType={imageType} />
+        <PokemonCard search={search} id={i} imageType={imageType} />
       </li>
     ));
   }

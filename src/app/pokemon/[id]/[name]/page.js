@@ -23,7 +23,7 @@ export default function Pokemon({ params, searchParams }) {
     return (
         <main className="min-h-screen flex flex-col justify-start">
             <div className="flex flex-col justify-center items-center">
-                {isLoading ? <Skeleton circle={false} width={400} height={400} /> :
+                {isLoading ? <Skeleton circle={false} width={400} height={420} /> :
                 <Image
                     src={imageUrl || data.sprites.other['dream_world'].front_default}
                     alt={`Image of ${name}`}
