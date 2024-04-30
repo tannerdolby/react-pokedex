@@ -51,7 +51,7 @@ function PokemonCards({ count, imageType }) {
   for (let i=1; i < count; i++) {
     cards.push((
       <li key={`${i}-${imageType}`}>
-        <PokemonCard pokemonId={i} imageType={imageType} />
+        <PokemonCard id={i} imageType={imageType} />
       </li>
     ));
   }

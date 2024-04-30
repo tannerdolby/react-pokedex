@@ -2,13 +2,11 @@ import Image from 'next/image';
 import { titleCase } from '../helpers/util';
 import {getCustomPokemonSpriteUrl, POKE_API_URL} from '../helpers/pokemon';
 import Link from 'next/link';
-import useSWR from 'swr';
 import Skeleton from 'react-loading-skeleton';
+import useFetchPokemon from '../hooks/useFetchPokemon';
 
-const fetcher = (...args) => fetch(...args).then(res => res.json());
-
-export default function PokemonCard({imageType, pokemonId}) {
-    const {data, isLoading, isError} = useSWR(`${POKE_API_URL}/${pokemonId}`, fetcher);
+export default function PokemonCard({imageType, id}) {
+    const {data, isLoading, isError} = useFetchPokemon(id);
 
     if (isLoading) {
         return <Skeleton height={200} width={200} />;
