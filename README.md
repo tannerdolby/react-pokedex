@@ -1,5 +1,5 @@
 # Pokédex
-Infinite scroller of pokémon. View all pokémon across all generations. Pokemon data fetched from the [PokeAPI](https://pokeapi.co/).
+Infinite scroller of pokémon. View all 1,026 pokémon across all generations. Pokemon data fetched from the [PokeAPI](https://pokeapi.co/).
 
 ## Getting Started
 
