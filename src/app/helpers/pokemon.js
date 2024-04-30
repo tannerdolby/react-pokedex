@@ -1,9 +1,4 @@
-export const BASE_URL = 'https://pokeapi.co/api/v2/pokemon/';
-
-export async function fetchPokemonById(id) {
-    const res = await fetch(`${BASE_URL}${id}`);
-    return await res.json();
-}
+export const POKE_API_URL = 'https://pokeapi.co/api/v2/pokemon/';
 
 export function getCustomPokemonSpriteUrl(sprites, imageType) {
     if (!sprites) {

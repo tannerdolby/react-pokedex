@@ -1,38 +1,51 @@
+"use client";
+
 import { fetchPokemonById, POKEMON_TYPE_COLORS, POKEMON_IDS, getCustomPokemonSpriteUrl } from "../../../helpers/pokemon";
 import Image from "next/image";
 import Link from "next/link";
 import { titleCase } from "../../../helpers/util";
+import { useFetchPokemon } from "../../../hooks/useFetchPokemon";
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css'
 
-export default async function Pokemon({ params, searchParams }) {
+export default function Pokemon({ params, searchParams }) {
     const {id, name} = params;
     const {imageType} = searchParams;
-    const pokemon = await fetchPokemonById(id);
-    const imageUrl = getCustomPokemonSpriteUrl(pokemon.sprites, imageType);
-    const prevNextBtnStyles = 'bg-black text-white py-1 px-4 rounded-md hover:text-white hover:bg-slate-900 hover:no-underline';
+    // const pokemon = await fetchPokemonById(id);
+    const {pokemon, isError, isLoading} = useFetchPokemon(id);
+    const imageUrl = getCustomPokemonSpriteUrl(pokemon?.sprites, imageType);
+    // const prevNextBtnStyles = 'bg-black text-white py-1 px-4 rounded-md hover:text-white hover:bg-slate-900 hover:no-underline';
+    const prevNextBtnStyles = 'bg-slate-100 text-black px-4 py-1 rounded-md border border-color-gray-100';
     let prevId = Number(id)-1;
     let nextId = Number(id)+1;
-
     prevId = prevId <= 0 ? 151 : prevId;
     nextId = nextId >= 151 ? 1 : nextId;
 
+    console.log(isLoading, pokemon);
+
+
     return (
-        <main className="min-h-screen flex flex-col justify-between">
-            <div className="flex flex-col justify-center items-center min-h-[80vh] mt-8">
+        <main className="min-h-screen flex flex-col justify-start">
+            <div className="flex flex-col justify-center items-center">
+                {isLoading ? <Skeleton circle={false} width={400} height={420} /> :
                 <Image
                     src={imageUrl || pokemon.sprites.other['dream_world'].front_default}
                     alt={`Image of ${name}`}
-                    width={375}
-                    height={375}
-                    className='w-[375px] h-[375px]'
+                    width={400}
+                    height={400}
+                    className='w-[400px] h-[400px]'
+                    priority={true}
                 />
+                }
+                
                 <div className="flex justify-between items-center">
-                    <h1 className="text-4xl my-4">{titleCase(name)}</h1>
-                    <span className="text-black ml-2">#{pokemon.id}</span>
+                    <h1 className="text-4xl mt-0 mb-2">{titleCase(name)}</h1>
+                    <span className="text-black ml-2">#{id}</span>
                 </div>
-                <span>Weight: {pokemon.weight} lbs</span>
-                <span>Height: {pokemon.height}&quot;</span>
+                <span>Weight: {pokemon?.weight} lbs</span>
+                <span>Height: {pokemon?.height}&quot;</span>
                 <ul className='flex flex-start items-center flex-wrap gap-2 my-4'>
-                    {pokemon.types.map((t) => {
+                    {pokemon?.types.map((t) => {
                         return (
                             <li
                                 key={`${pokemon.name}-${t.type.name}`}
@@ -47,9 +60,6 @@ export default async function Pokemon({ params, searchParams }) {
                         )
                     })}
                 </ul>
-                {/* TODO: Pokemon stats */}
-                {/* TODO: Pokemon cries (audio files .ogg) */}
-                {/* TODO: Pokemon abilities */}
             </div>
             <div className="flex justify-between items-center">
                 <Link
@@ -59,7 +69,7 @@ export default async function Pokemon({ params, searchParams }) {
                     }}
                     className={prevNextBtnStyles}
                 >
-                    Prev
+                    &#8592; Prev
                 </Link>
                 <Link
                     href={{
@@ -68,9 +78,15 @@ export default async function Pokemon({ params, searchParams }) {
                     }}
                     className={prevNextBtnStyles}
                     >
-                        Next
+                        Next &#8594;
                     </Link>
             </div>
         </main>
+    )
+}
+
+function Content() {
+    return (
+        <h1></h1>
     )
 }

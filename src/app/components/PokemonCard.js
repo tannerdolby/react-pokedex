@@ -1,30 +1,44 @@
 import Image from 'next/image';
 import { titleCase } from '../helpers/util';
-import {getCustomPokemonSpriteUrl} from '../helpers/pokemon';
+import {getCustomPokemonSpriteUrl, POKE_API_URL} from '../helpers/pokemon';
 import Link from 'next/link';
+import useSWR from 'swr';
+import Skeleton from 'react-loading-skeleton';
 
-export default function PokemonCard({pokemon, imageType}) {
-    const sprites = pokemon.sprites;
+const fetcher = (...args) => fetch(...args).then(res => res.json());
+
+export default function PokemonCard({imageType, pokemonId}) {
+    const {data, isLoading, isError} = useSWR(`${POKE_API_URL}/${pokemonId}`, fetcher);
+
+    if (isLoading) {
+        return <Skeleton height={200} width={200} />;
+    }
+
+    if (isError) {
+        return <p>oops! failed to load</p>
+    }
+
+    const sprites = data.sprites;
     const customUrl = getCustomPokemonSpriteUrl(sprites, imageType);
 
     return (
         <div>
             <Link scroll={true} href={{
-                pathname: `/pokemon/${pokemon.id}/${pokemon.name}`,
+                pathname: `/pokemon/${data.id}/${data.name}`,
                 query: {imageType: imageType},
             }}>
                 <Image
                     className='bg-white p-2 rounded-md h-[200px] hover:bg-slate-100'
                     src={customUrl || sprites['front_default']}
-                    alt={`Image of ${pokemon.name}`}
+                    alt={`Image of ${data.name}`}
                     width={200}
                     height={200}
-                    fetchPriority="high"
+                    
                 />
             </Link>
             <div className="my-2">
                 <span className="text-xl text-center block">
-                    {titleCase(pokemon.name)}
+                    {titleCase(data.name)}
                 </span>
             </div>
         </div>
