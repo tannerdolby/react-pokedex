@@ -27,9 +27,9 @@ export default function Pokemon({ params, searchParams }) {
     }
 
     return (
-        <main className="min-h-screen flex flex-col justify-start">
+        <main className="flex flex-col justify-start mt-5">
             <div className="flex flex-col justify-center items-center">
-                {isLoading ? <Skeleton circle={false} width={400} height={420} /> :
+                {isLoading ? <Skeleton width={400} height={400} baseColor="#eee" /> :
                 <img
                     src={imageUrl || data.sprites.other['dream_world'].front_default}
                     alt={`Image of ${name}`}
@@ -44,9 +44,9 @@ export default function Pokemon({ params, searchParams }) {
                     <h1 className="text-4xl mt-0 mb-2">{titleCase(name)}</h1>
                     <span className="text-black ml-2">#{id}</span>
                 </div>
-                <span>Weight: {data?.weight} lbs</span>
-                <span>Height: {data?.height}&quot;</span>
-                <ul className='flex flex-start items-center flex-wrap gap-2 my-4'>
+                {isLoading ? <Skeleton width={120} height={20} /> : <span>Weight: {data?.weight || 0} lbs</span>}
+                {isLoading ? <Skeleton width={120} height={20} /> : <span>Height: {data.height || 0}&quot;</span>}
+                {isLoading ? <Skeleton className='!rounded-full my-4' width={50} height={20} /> : <ul className='flex flex-start items-center flex-wrap gap-2 my-4'>
                     {data?.types.map((t) => {
                         return (
                             <li
@@ -61,7 +61,7 @@ export default function Pokemon({ params, searchParams }) {
                             </li>
                         )
                     })}
-                </ul>
+                </ul>}
             </div>
             <div className="flex justify-between items-center">
                 <Link
