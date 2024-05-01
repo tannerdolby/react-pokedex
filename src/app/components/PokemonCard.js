@@ -35,6 +35,7 @@ export default function PokemonCard({imageType, id, search}) {
                     alt={`Image of ${data.name}`}
                     width={200}
                     height={200}
+                    loading="lazy"
                 />
             </Link>
             <div className="my-2">
