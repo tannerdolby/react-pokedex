@@ -1,16 +1,63 @@
 export const POKE_API_URL = 'https://pokeapi.co/api/v2/pokemon/';
 
+export const POKEMON_GENERATIONS = {
+    1: {
+        label: 'I',
+        name: 'Kanto',
+        totalPokemon: 151
+    },
+    2: {
+        label: 'II',
+        name: 'Johto',
+        totalPokemon: 100,
+    },
+    3: {
+        label: 'III',
+        name: 'Hoenn',
+        totalPokemon: 135,
+    },
+    4: {
+        label: 'IV',
+        name: 'Sinnoh',
+        totalPokemon: 107,
+    },
+    5: {
+        label: 'V',
+        name: 'Unova',
+        totalPokemon: 156,
+    },
+    6: {
+        label: 'VI',
+        name: 'Kalos',
+        totalPokemon: 72,
+    },
+    7: {
+        label: 'VII',
+        name: 'Alola',
+        totalPokemon: 88,
+    },
+    8: {
+        label: 'VIII',
+        name: 'Galar and Hisui',
+        totalPokemon: 96,
+    },
+    9: {
+        label: 'IX',
+        name: 'Paldea',
+        totalPokemon: 120,
+    },
+};
+
 export function getCustomPokemonSpriteUrl(sprites, imageType) {
     if (!sprites) {
         return '';
     }
 
+    // TODO: Add support for other available image directions (front, back)
+    let spriteDirection = 'front_default';
     const otherSprites = sprites.other;
     const imageKey = imageType.split(" ")[0];
 
-    // TODO: Add support for other available image directions (front, back)
-    let spriteDirection = 'front_default';
-    
     if (imageType.includes('shiny')) {
         spriteDirection = 'front_shiny';
     }

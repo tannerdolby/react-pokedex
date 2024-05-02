@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Skeleton from 'react-loading-skeleton';
 import useFetchPokemon from '../hooks/useFetchPokemon';
 
-export default function PokemonCard({imageType, id, search}) {
+export default function PokemonCard({imageType, id, search, generation}) {
     const {data, isLoading, isError} = useFetchPokemon(id);
 
     if (isLoading) {

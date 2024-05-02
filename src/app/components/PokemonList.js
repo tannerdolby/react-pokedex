@@ -3,9 +3,12 @@
 import { useEffect, useState } from "react";
 import 'react-loading-skeleton/dist/skeleton.css'
 import ImageSwitcher from "./ImageSwitcher";
-import PokemonCard from "./PokemonCard";
+import { POKEMON_GENERATIONS } from "../helpers/pokemon";
+import PokemonCards from "./PokemonCards";
 
 export default function PokemonList() {
+  const [cards, setCards] = useState([]);
+  const [generation, setGeneration] = useState(1);
   const [count, setCount] = useState(10);
   const [searched, setSearched] = useState([]);
   const [imageType, setImageType] = useState('dream_world');
@@ -36,30 +39,23 @@ export default function PokemonList() {
           }}
         />
       </div>
-      {<PokemonCards search={searched} count={count} imageType={imageType} />}
+      <ul className='flex gap-4 absolute top-4'>
+        {Object.values(POKEMON_GENERATIONS).map((gen, i) => {
+          return (
+            <li key={gen.label} className={`${generation === i+1 ? 'border-b-2 border-black' :''}`}>
+              <button onClick={() => setGeneration(i+1)}>{gen.name}</button>
+            </li>
+            )
+        })}
+      </ul>
+      {<PokemonCards generation={generation} cards={cards} search={searched} count={count} imageType={imageType} />}
+      {count + 10 > POKEMON_GENERATIONS[generation].totalPokemon ? '' :
       <button
         onClick={() => setCount(count + 10)}
         className="text-sm bg-slate-50 rounded-md px-4 py-1 border border-gray-300 mt-8 hover:bg-slate-100"
       >
         Load More
-      </button>
+      </button>}
     </>
   );
-}
-
-function PokemonCards({ count, imageType, search, }) {
-  const cards = [];
-  for (let i=1; i <= count; i++) {
-    cards.push((
-      <li key={`${i}-${imageType}`}>
-        <PokemonCard search={search} id={i} imageType={imageType} />
-      </li>
-    ));
-  }
-
-  return (
-    <ul className="flex justify-center items-center flex-wrap gap-6 mt-10">
-      {cards}
-    </ul>
-  )
 }
