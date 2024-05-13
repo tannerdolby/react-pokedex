@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { titleCase } from '../helpers/util';
 import {getCustomPokemonSpriteUrl, POKE_API_URL} from '../helpers/pokemon';
 import Link from 'next/link';
@@ -26,7 +25,7 @@ export default function PokemonCard({imageType, id, search, generation}) {
     return (
         <div>
             <Link scroll={true} href={{
-                pathname: `/pokemon/${data.id}/${data.name}`,
+                pathname: `/pokemon/${data.id}`,
                 query: {imageType: imageType},
             }}>
                 <img

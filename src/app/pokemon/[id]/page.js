@@ -1,20 +1,21 @@
 "use client";
 
-import { POKEMON_TYPE_COLORS, POKEMON_IDS, getCustomPokemonSpriteUrl } from "../../../helpers/pokemon";
+import { POKEMON_TYPE_COLORS, POKEMON_IDS, getCustomPokemonSpriteUrl } from "../../helpers/pokemon";
 import Image from "next/image";
 import Link from "next/link";
-import { titleCase } from "../../../helpers/util";
-import useFetchPokemon from "../../../hooks/useFetchPokemon";
+import { titleCase } from "../../helpers/util";
+import useFetchPokemon from "../../hooks/useFetchPokemon";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
 
 export default function Pokemon({ params, searchParams }) {
-    const {id, name} = params;
+    const {id} = params;
     const {imageType} = searchParams;
-    // const pokemon = await fetchPokemonById(id);
     const {data, isError, isLoading} = useFetchPokemon(id);
     const imageUrl = getCustomPokemonSpriteUrl(data?.sprites, imageType);
     const prevNextBtnStyles = 'bg-slate-50 text-black px-4 py-1 rounded-md border border-color-gray-100 hover:bg-slate-100 hover:text-black hover:no-underline hover:border-color-gray-200';
+    // TODO: restrict prev/next to the currently selected
+    // pokemon generation
     let prevId = Number(id)-1;
     let nextId = Number(id)+1;
     prevId = prevId <= 0 ? 151 : prevId;
@@ -32,7 +33,7 @@ export default function Pokemon({ params, searchParams }) {
                 {isLoading ? <Skeleton width={400} height={400} baseColor="#eee" /> :
                 <img
                     src={imageUrl || data.sprites.other['dream_world'].front_default}
-                    alt={`Image of ${name}`}
+                    alt={`Image of ${data?.name}`}
                     width={400}
                     height={400}
                     className='w-[400px] h-[400px]'
@@ -41,7 +42,7 @@ export default function Pokemon({ params, searchParams }) {
                 }
                 
                 <div className="flex justify-between items-center">
-                    <h1 className="text-4xl mt-0 mb-2">{titleCase(name)}</h1>
+                    <h1 className="text-4xl mt-0 mb-2">{titleCase(data?.name)}</h1>
                     <span className="text-black ml-2">#{id}</span>
                 </div>
                 {isLoading ? <Skeleton width={120} height={20} /> : <span>Weight: {data?.weight || 0} lbs</span>}
@@ -66,7 +67,7 @@ export default function Pokemon({ params, searchParams }) {
             <div className="flex justify-between items-center">
                 <Link
                     href={{
-                        pathname: `/pokemon/${prevId}/${POKEMON_IDS[prevId]}`,
+                        pathname: `/pokemon/${prevId}`,
                         query: {imageType: imageType}
                     }}
                     className={prevNextBtnStyles}
@@ -75,7 +76,7 @@ export default function Pokemon({ params, searchParams }) {
                 </Link>
                 <Link
                     href={{
-                        pathname: `/pokemon/${nextId}/${POKEMON_IDS[nextId]}`,
+                        pathname: `/pokemon/${nextId}`,
                         query: {imageType: imageType}
                     }}
                     className={prevNextBtnStyles}

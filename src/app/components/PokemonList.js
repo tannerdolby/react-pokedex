@@ -7,7 +7,6 @@ import { POKEMON_GENERATIONS } from "../helpers/pokemon";
 import PokemonCards from "./PokemonCards";
 
 export default function PokemonList() {
-  const [cards, setCards] = useState([]);
   const [generation, setGeneration] = useState(1);
   const [count, setCount] = useState(10);
   const [searched, setSearched] = useState([]);
@@ -48,14 +47,20 @@ export default function PokemonList() {
             )
         })}
       </ul>
-      {<PokemonCards generation={generation} cards={cards} search={searched} count={count} imageType={imageType} />}
+      <PokemonCards
+        generation={generation}
+        search={searched}
+        count={count}
+        imageType={imageType}
+      />
       {count + 10 > POKEMON_GENERATIONS[generation].totalPokemon ? '' :
-      <button
-        onClick={() => setCount(count + 10)}
-        className="text-sm bg-slate-50 rounded-md px-4 py-1 border border-gray-300 mt-8 hover:bg-slate-100"
-      >
-        Load More
-      </button>}
+        <button
+          onClick={() => setCount(count + 10)}
+          className="text-sm bg-slate-50 rounded-md px-4 py-1 border border-gray-300 mt-8 hover:bg-slate-100"
+        >
+          Load More
+        </button>
+      }
     </>
   );
 }
