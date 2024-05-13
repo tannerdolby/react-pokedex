@@ -42,7 +42,10 @@ export default function PokemonList() {
         {Object.values(POKEMON_GENERATIONS).map((gen, i) => {
           return (
             <li key={gen.label} className={`${generation === i+1 ? 'border-b-2 border-black' :''}`}>
-              <button onClick={() => setGeneration(i+1)}>{gen.name}</button>
+              <button onClick={() => {
+                setGeneration(i+1);
+                setCount(10);
+              }}>{gen.name}</button>
             </li>
             )
         })}
