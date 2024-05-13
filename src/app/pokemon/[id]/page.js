@@ -41,10 +41,11 @@ export default function Pokemon({ params, searchParams }) {
                 />
                 }
                 
+                {isLoading ? <Skeleton width={150} height={40} /> :
                 <div className="flex justify-between items-center">
                     <h1 className="text-4xl mt-0 mb-2">{titleCase(data?.name)}</h1>
                     <span className="text-black ml-2">#{id}</span>
-                </div>
+                </div>}
                 {isLoading ? <Skeleton width={120} height={20} /> : <span>Weight: {data?.weight || 0} lbs</span>}
                 {isLoading ? <Skeleton width={120} height={20} /> : <span>Height: {data.height || 0}&quot;</span>}
                 {isLoading ? <Skeleton className='!rounded-full my-4' width={50} height={20} /> : <ul className='flex flex-start items-center flex-wrap gap-2 my-4'>
