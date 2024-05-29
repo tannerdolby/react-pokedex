@@ -9,7 +9,7 @@ export default function PokemonCards({ count, imageType, search, generation }) {
         startIdx += POKEMON_GENERATIONS[i].totalPokemon;
     }
 
-    for (let i = startIdx; i < startIdx + count; i++) {
+    for (let i = startIdx; i <= startIdx + count; i++) {
       cards.push((
         <li key={`${i}-${imageType}`}>
           <PokemonCard search={search} id={i} imageType={imageType} />

@@ -29,7 +29,7 @@ export default function PokemonCard({imageType, id, search, generation}) {
                 query: {imageType: imageType},
             }}>
                 <img
-                    className='bg-white p-2 rounded-md h-[200px] hover:bg-slate-100'
+                    className='bg-transparent p-2 rounded-md h-[200px] hover:bg-slate-100'
                     src={customUrl || sprites['front_default']}
                     alt={`Image of ${data.name}`}
                     width={200}
